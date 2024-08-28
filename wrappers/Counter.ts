@@ -28,11 +28,11 @@ export class Counter implements Contract {
         });
     }
 
-    async sendNumber(provider: ContractProvider, via: Sender, value: bigint) {
+    async sendNumber(provider: ContractProvider, via: Sender, value: bigint, number: bigint) {
         await provider.internal(via, {
             value,
             sendMode: SendMode.PAY_GAS_SEPARATELY,
-            body: beginCell().endCell(),
+            body: beginCell().storeUint(number, 32).endCell(),
         });
     }
 
